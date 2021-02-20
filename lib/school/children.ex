@@ -1,5 +1,6 @@
 defmodule School.Children do
   use Ecto.Schema
+  import Ecto.Changeset
 
   alias School.Guardian
 
@@ -13,5 +14,14 @@ defmodule School.Children do
     many_to_many :guradians, Guardian, join_through: "children_guardians"
 
     timestamps()
+  end
+
+  @valid_genders ["M", "F"]
+
+  def changeset(changeset, params \\ %{}) do
+    changeset
+    |> cast(params, [:name, :gender, :contact_no, :medical_condition, :remarks])
+    |> validate_required([:name, :gender])
+    |> validate_inclusion(:gender, @valid_genders)
   end
 end

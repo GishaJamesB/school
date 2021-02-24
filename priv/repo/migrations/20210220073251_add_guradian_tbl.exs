@@ -5,7 +5,7 @@ defmodule School.Repo.Migrations.AddGuradianTbl do
     create table(:guardians) do
       add :name, :string
       add :relation, :string
-      add :child_id, :integer
+      add :religion, :string
 
       timestamps()
       # flush()

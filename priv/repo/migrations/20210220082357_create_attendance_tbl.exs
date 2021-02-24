@@ -5,6 +5,7 @@ defmodule School.Repo.Migrations.CreateAttendanceTbl do
     create table(:attendance) do
       add :date, :date
       add :child_id, references(:children)
+      timestamps()
     end
 
   end

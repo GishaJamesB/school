@@ -59,10 +59,10 @@ csv
       ContactInfo.changeset(%ContactInfo{}, mother_contact_info)
       |> School.Repo.insert
 
-      ChildrenGuardian.changeset(%ChildrenGuardian{}, %{:child_id => 101, :guardian_id => father_record.id})
+      ChildrenGuardian.changeset(%ChildrenGuardian{}, %{:children_id => child_record.id, :guardian_id => father_record.id})
       |> School.Repo.insert
 
-      ChildrenGuardian.changeset(%ChildrenGuardian{}, %{:child_id => child_record.id, :guardian_id => mother_record.id})
+      ChildrenGuardian.changeset(%ChildrenGuardian{}, %{:children_id => child_record.id, :guardian_id => mother_record.id})
       |> School.Repo.insert
     end)
   end

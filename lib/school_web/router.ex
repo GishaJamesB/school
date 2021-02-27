@@ -7,6 +7,8 @@ defmodule SchoolWeb.Router do
 
   scope "/api", SchoolWeb do
     pipe_through :api
+
+    get "/children", ChildrenController, :index
   end
 
   # Enables LiveDashboard only for development

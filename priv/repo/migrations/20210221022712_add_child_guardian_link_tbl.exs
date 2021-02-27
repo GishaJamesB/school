@@ -3,7 +3,7 @@ defmodule School.Repo.Migrations.AddChildGuardianLinkTbl do
 
   def change do
     create table(:children_guardians) do
-      add :child_id, references(:children)
+      add :children_id, references(:children)
       add :guardian_id, references(:guardians)
       timestamps()
     end

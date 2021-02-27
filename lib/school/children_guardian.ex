@@ -3,7 +3,7 @@ defmodule School.ChildrenGuardian do
   import Ecto.Changeset
 
   schema "children_guardians" do
-    field :child_id, :integer
+    field :children_id, :integer
     field :guardian_id, :integer
 
     timestamps()
@@ -11,7 +11,7 @@ defmodule School.ChildrenGuardian do
 
   def changeset(changeset, params \\ %{}) do
     changeset
-    |> cast(params, [:child_id, :guardian_id])
-    |> validate_required([:child_id, :guardian_id])
+    |> cast(params, [:children_id, :guardian_id])
+    |> validate_required([:children_id, :guardian_id])
   end
 end

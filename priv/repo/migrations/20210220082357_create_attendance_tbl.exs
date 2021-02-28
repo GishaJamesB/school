@@ -3,8 +3,8 @@ defmodule School.Repo.Migrations.CreateAttendanceTbl do
 
   def change do
     create table(:attendance) do
-      add :date, :date
-      add :child_id, references(:children)
+      add :date_id, references(:dates)
+      add :children_id, references(:children)
       timestamps()
     end
 

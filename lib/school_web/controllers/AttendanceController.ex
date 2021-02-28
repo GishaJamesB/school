@@ -1,8 +1,8 @@
-defmodule SchoolWeb.ChildrenController do
+defmodule SchoolWeb.AttendanceController do
   use SchoolWeb, :controller
 
   def index(conn, _params) do
-    data = School.Services.Children.get_all
+    data = School.Services.Attendance.insert
     render conn, "children.json", children: data
   end
 end

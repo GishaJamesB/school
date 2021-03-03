@@ -1,8 +1,11 @@
 defmodule SchoolWeb.AttendanceController do
   use SchoolWeb, :controller
 
-  def index(conn, _params) do
-    data = School.Services.Attendance.insert
-    render conn, "children.json", children: data
+  def create(conn, params) do
+    case School.Services.Attendance.create(params) do
+      {:ok, _} -> render conn, "success.json", %{message: "completed"}
+      {:error, _} -> render conn, "failure.json", %{message: "could not mark attendance"}
+    end
+
   end
 end

@@ -9,6 +9,8 @@ defmodule SchoolWeb.Router do
     pipe_through :api
 
     get "/children", ChildrenController, :index
+    post "/date", DatesController, :create
+    post "/attendance", AttendanceController, :create
   end
 
   # Enables LiveDashboard only for development

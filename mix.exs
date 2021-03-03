@@ -43,7 +43,8 @@ defmodule School.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:csv, "~> 2.4"}
+      {:csv, "~> 2.4"},
+      {:cors_plug, "~> 1.5"},
     ]
   end
 

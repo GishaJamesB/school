@@ -3,13 +3,16 @@ defmodule SchoolWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CORSPlug
   end
 
   scope "/api", SchoolWeb do
     pipe_through :api
 
     get "/children", ChildrenController, :index
+    get "/dates", DatesController, :get
     post "/date", DatesController, :create
+    options "/date", DatesController, :create
     post "/attendance", AttendanceController, :create
   end
 

@@ -12,6 +12,7 @@ defmodule School.Dates do
   def changeset(changeset, params \\ %{}) do
     changeset
     |> cast(params, [:date])
+    |> unique_constraint(:date)
   end
 
 end

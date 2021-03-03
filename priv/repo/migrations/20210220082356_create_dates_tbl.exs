@@ -6,5 +6,7 @@ defmodule School.Repo.Migrations.CreateDatesTbl do
       add :date, :date
     end
 
+    create unique_index(:dates, [:date])
+
   end
 end

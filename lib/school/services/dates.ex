@@ -10,7 +10,7 @@ defmodule School.Services.Dates do
 
   def get() do
     query = from d in Dates,
-     select: %{date: d.date}
+     select: %{date: d.date, id: d.id}
     query |> Repo.all()
   end
 end

@@ -10,6 +10,13 @@ defmodule SchoolWeb.ChildrenView do
   def child_json(child) do
     %{
       id: child.id,
+      name: child.name
+    }
+  end
+
+  def child_full_json(child) do
+    %{
+      id: child.id,
       name: child.name,
       gender: child.gender,
       contact_number: child.contact_no,

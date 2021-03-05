@@ -12,4 +12,18 @@ defmodule SchoolWeb.AttendanceView do
       error: message
     }
   end
+
+  def render("children_attendance.json", %{children: children}) do
+    %{
+      children: Enum.map(children, &child_attendance_json/1)
+    }
+  end
+
+  def child_attendance_json(child) do
+    %{
+      id: child.id,
+      name: child.name
+    }
+  end
+
 end

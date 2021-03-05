@@ -13,7 +13,9 @@ defmodule SchoolWeb.Router do
     get "/dates", DatesController, :get
     post "/date", DatesController, :create
     options "/date", DatesController, :create
+    get "/attendance/:date", AttendanceController, :get_attendance_by_date
     post "/attendance", AttendanceController, :create
+    options "/attendance", AttendanceController, :create
   end
 
   # Enables LiveDashboard only for development

@@ -14,7 +14,8 @@ defmodule School.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: School.PubSub},
       # Start the Endpoint (http/https)
-      SchoolWeb.Endpoint
+      SchoolWeb.Endpoint,
+      School.Cache
       # Start a worker by calling: School.Worker.start_link(arg)
       # {School.Worker, arg}
     ]

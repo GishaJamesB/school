@@ -27,8 +27,7 @@ defmodule SchoolWeb.AttendanceController do
       |> Enum.at(0)
       |> Map.get(:attendance)
     %{
-      :date => date,
-      :present => attendance_for_the_day
+      date => attendance_for_the_day
     }
   end
 
@@ -42,7 +41,9 @@ defmodule SchoolWeb.AttendanceController do
                       end)
 
     result = all_children |> Enum.map(fn x->
-      attendance_for_the_child = all_dates |> Enum.map(fn d -> check_if_present(x.id, d.date, attendance) end)
+      attendance_for_the_child = all_dates |> Enum.reduce(%{}, fn d, acc ->
+        check_if_present(x.id, d.date, attendance) |> Map.merge(acc)
+      end)
       %{
         :id => x.id,
         :name => x.name,
@@ -50,6 +51,6 @@ defmodule SchoolWeb.AttendanceController do
       }
     end)
 
-    json(conn, %{children: result})
+    json(conn, %{data: result})
   end
 end

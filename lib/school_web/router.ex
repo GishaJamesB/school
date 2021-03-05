@@ -11,9 +11,13 @@ defmodule SchoolWeb.Router do
 
     get "/children", ChildrenController, :index
     get "/dates", DatesController, :get
+
     post "/date", DatesController, :create
     options "/date", DatesController, :create
+
     get "/attendance/:date", AttendanceController, :get_attendance_by_date
+    get "/attendance", AttendanceController, :get_attendance
+
     post "/attendance", AttendanceController, :create
     options "/attendance", AttendanceController, :create
   end

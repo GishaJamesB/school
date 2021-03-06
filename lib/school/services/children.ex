@@ -5,7 +5,7 @@ defmodule School.Services.Children do
   import Ecto.Query
 
   def get_all do
-    d = :ets.lookup(:school_bucket, :children)
+    d = School.Cache.get(:children)
     case d do
       [] ->
         query = from c in Children,
@@ -13,7 +13,7 @@ defmodule School.Services.Children do
           order_by: [asc: c.name]
 
         all_children = query |> Repo.all()
-        GenServer.call(School.Cache, {:insert, {:children, all_children}})
+        School.Cache.add({:children, all_children})
         all_children
       _ ->
         d[:children]

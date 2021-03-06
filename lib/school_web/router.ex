@@ -16,7 +16,7 @@ defmodule SchoolWeb.Router do
     options "/date", DatesController, :create
 
     get "/attendance/:date", AttendanceController, :get_attendance_by_date
-    get "/attendance", AttendanceController, :get_attendance
+    get "/attendance-report", AttendanceController, :get_attendance
 
     post "/attendance", AttendanceController, :create
     options "/attendance", AttendanceController, :create

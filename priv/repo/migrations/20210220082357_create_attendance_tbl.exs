@@ -8,5 +8,7 @@ defmodule School.Repo.Migrations.CreateAttendanceTbl do
       timestamps()
     end
 
+    create unique_index(:attendance, [:date_id, :children_id], name: :date_child)
+
   end
 end

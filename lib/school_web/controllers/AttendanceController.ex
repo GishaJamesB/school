@@ -5,9 +5,14 @@ defmodule SchoolWeb.AttendanceController do
   alias School.Services.Children
 
   def create(conn, params) do
-    case School.Services.Attendance.create(params) do
-      {:ok, _} -> render conn, "success.json", %{message: "completed"}
-      {:error, _} -> render conn, "failure.json", %{message: "could not mark attendance"}
+    changeset = params |> Map.delete("attendance")
+    if(Map.get(params, "attendance") == false) do
+      School.Services.Attendance.delete(changeset)
+    else
+      case School.Services.Attendance.create(changeset) do
+        {:ok, _} -> render conn, "success.json", %{message: "completed"}
+        {:error, _} -> render conn, "failure.json", %{message: "could not mark attendance"}
+      end
     end
   end
 

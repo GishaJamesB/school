@@ -10,6 +10,13 @@ defmodule School.Services.Attendance do
     Attendance.changeset(%Attendance{}, data) |> Repo.insert
   end
 
+  def delete(data) do
+    query = from a in Attendance,
+      where: a.date_id == ^Map.get(data, "date_id") and a.children_id == ^Map.get(data, "children_id")
+
+    query |> Repo.one!() |> Repo.delete
+  end
+
   def get_attendance_by_date(dateId, all_children) do
     query = from a in Attendance,
       select: a.children_id,

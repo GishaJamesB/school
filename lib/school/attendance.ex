@@ -12,6 +12,7 @@ defmodule School.Attendance do
     changeset
     |> cast(params, [:children_id, :date_id])
     |> validate_required([:children_id, :date_id])
+    |> unique_constraint(:unique_date_child, name: :date_child)
   end
 
 end

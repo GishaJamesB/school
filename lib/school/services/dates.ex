@@ -1,9 +1,9 @@
 defmodule School.Services.Dates do
   alias School.Dates
   alias School.Repo
+  alias School.Utils.Errors
 
   import Ecto.Query
-  import Ecto.Changeset
 
   def create(data) do
     case Dates.changeset(%Dates{}, data) |> Repo.insert do
@@ -11,19 +11,8 @@ defmodule School.Services.Dates do
         School.Cache.remove(:dates)
         get()
       {:error, changeset} ->
-        error = traverse_errors(changeset, fn {msg, opts} ->
-          Enum.reduce(opts, msg, fn {key, value}, acc ->
-            String.replace(acc, "%{#{key}}", to_string(value))
-          end)
-        end)
-        |> Enum.reduce("", fn {k, v}, acc ->
-          joined_errors = Enum.join(v, "; ")
-          "#{acc} #{k}: #{joined_errors}"
-        end)
-        {:error, error}
+        {:error, Errors.get_formatted_errors(changeset)}
     end
-
-
   end
 
   def get() do

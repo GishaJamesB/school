@@ -19,15 +19,19 @@ defmodule School.Services.Dates do
     d = School.Cache.get(:dates)
     case d do
       [] ->
-        query = from d in Dates,
-          select: %{date: d.date, id: d.id},
-          order_by: d.date
-        dates =  query |> Repo.all()
+        dates =  get_from_db()
         School.Cache.add({:dates, dates})
         dates
       _ ->
         d[:dates]
     end
-
   end
+
+  def get_from_db() do
+    query = from d in Dates,
+          select: %{date: d.date, id: d.id},
+          order_by: d.date
+    query |> Repo.all()
+  end
+
 end

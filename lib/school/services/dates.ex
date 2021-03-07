@@ -31,7 +31,8 @@ defmodule School.Services.Dates do
     case d do
       [] ->
         query = from d in Dates,
-          select: %{date: d.date, id: d.id}
+          select: %{date: d.date, id: d.id},
+          order_by: d.date
         dates =  query |> Repo.all()
         School.Cache.add({:dates, dates})
         dates

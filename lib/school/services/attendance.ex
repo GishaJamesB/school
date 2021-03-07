@@ -60,4 +60,27 @@ defmodule School.Services.Attendance do
     end)
   end
 
+  # file = File.open!("test.csv", [:write, :utf8])
+  # table_data |> CSV.encode |> Enum.each(&IO.write(file, &1))
+  def get_flattened_attendance_report do
+    all_dates = Dates.get()
+    dates = all_dates |> Enum.map(fn x ->
+      Date.to_string(x[:date])
+    end)
+    header = [["name"] ++ dates]
+    body = get_full_attendance()
+      |> Enum.reduce([], fn record, acc->
+        attendance = all_dates |> Enum.reduce([], fn x, ac->
+          ac ++ [
+            case record.attendance |> Map.get(x.date) do
+              true -> "|"
+              false -> "X"
+            end
+          ]
+        end)
+        acc ++ [[record.name] ++ attendance]
+      end)
+    header ++ body
+  end
+
 end

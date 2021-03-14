@@ -2,7 +2,6 @@ defmodule SchoolWeb.AttendanceController do
   use SchoolWeb, :controller
 
   alias School.Services.Attendance
-  alias School.Services.Children
 
   def create(conn, params) do
     changeset = params |> Map.delete("attendance")
@@ -17,8 +16,7 @@ defmodule SchoolWeb.AttendanceController do
   end
 
   def get_attendance_by_date(conn, %{"date" => date}) do
-    all_children = Children.get_all()
-    data = Attendance.get_attendance_by_date(date, all_children)
+    data = Attendance.get_attendance_by_date(date)
     json(conn, %{children: data})
   end
 

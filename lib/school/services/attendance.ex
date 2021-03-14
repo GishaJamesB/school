@@ -26,8 +26,21 @@ defmodule School.Services.Attendance do
     query |> Repo.all()
   end
 
-  def get_attendance_by_date(dateId, all_children) do
-    School.Utils.Attendance.merge_attendance_with_child_data(all_children, get_ids_present(dateId))
+  def get_attendance_by_date(dateId) do
+    # School.Utils.Attendance.merge_attendance_with_child_data(all_children, get_ids_present(dateId))
+    query = "select c.id, c.name,
+            case
+              when a.id IS NULL then false
+              else true
+            end as attendance
+            from children c
+            left join attendance a on a.children_id = c.id
+            and a.date_id=#{dateId}"
+    result = Ecto.Adapters.SQL.query!(Repo, query, [])
+    columns = Enum.map result.columns, &(String.to_atom(&1))
+    Enum.map result.rows, fn(row) ->
+      Enum.zip(columns, row) |> Enum.into(%{})
+    end
   end
 
   def get_full_attendance() do

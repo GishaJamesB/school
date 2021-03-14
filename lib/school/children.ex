@@ -11,7 +11,22 @@ defmodule School.Children do
     field :medical_condition, :string
     field :remarks, :string
 
-    many_to_many :guardians, Guardian, join_through: "children_guardians"
+    many_to_many(
+      :guardians,
+      Guardian,
+      join_through: "children_guardians",
+      join_keys: [children_id: :id, guardian_id: :id]
+    )
+
+    has_many :attendance, School.Attendance
+
+    # many_to_many(
+    #   :attendance,
+    #   Attendance,
+    #   join_through: "attendance",
+    #   join_keys: [children_id: :id, guardian_id: :id]
+    # )
+
 
     timestamps()
   end

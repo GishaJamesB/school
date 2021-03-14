@@ -16,9 +16,9 @@ defmodule SchoolWeb.AttendanceController do
     end
   end
 
-  def get_attendance_by_date(conn, params) do
+  def get_attendance_by_date(conn, %{"date" => date}) do
     all_children = Children.get_all()
-    data = Attendance.get_attendance_by_date(params["date"], all_children)
+    data = Attendance.get_attendance_by_date(date, all_children)
     json(conn, %{children: data})
   end
 

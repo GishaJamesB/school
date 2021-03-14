@@ -10,6 +10,7 @@ defmodule SchoolWeb.Router do
     pipe_through :api
 
     get "/children", ChildrenController, :index
+    get "/children/:id", ChildrenController, :get_child
     get "/dates", DatesController, :get
 
     post "/date", DatesController, :create

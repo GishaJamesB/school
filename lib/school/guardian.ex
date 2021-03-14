@@ -10,6 +10,7 @@ defmodule School.Guardian do
     field :religion, :string
 
     many_to_many :children, Children, join_through: "children_guardians"
+    has_one :contact_info, School.ContactInfo
     timestamps()
   end
 

@@ -19,4 +19,10 @@ defmodule School.Services.Children do
         d[:children]
     end
   end
+
+  def get_child(id) do
+    School.Children
+    |> Repo.get(id)
+    |> Repo.preload([{:guardians, :contact_info}, {:attendance, :dates}])
+  end
 end

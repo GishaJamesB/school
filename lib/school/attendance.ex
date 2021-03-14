@@ -3,8 +3,8 @@ defmodule School.Attendance do
   import Ecto.Changeset
 
   schema "attendance" do
-    field :date_id, :integer
-    field :children_id, :integer
+    belongs_to :dates, School.Dates, foreign_key: :date_id
+    belongs_to :children, School.Children
     timestamps()
   end
 

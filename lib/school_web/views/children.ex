@@ -16,7 +16,8 @@ defmodule SchoolWeb.ChildrenView do
       medical_condition: child.medical_condition,
       remarks: child.remarks,
       guardians: Enum.map(child.guardians, &guardian_json/1),
-      present: Enum.map(child.attendance, &attendance_json/1)
+      present: Enum.map(child.attendance, &attendance_json/1),
+      absent: child.absent
     }
   end
 

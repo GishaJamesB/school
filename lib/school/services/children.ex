@@ -21,8 +21,17 @@ defmodule School.Services.Children do
   end
 
   def get_child(id) do
-    School.Children
-    |> Repo.get(id)
-    |> Repo.preload([{:guardians, :contact_info}, {:attendance, :dates}])
+    data = School.Children
+      |> Repo.get(id)
+      |> Repo.preload([{:guardians, :contact_info}, {:attendance, :dates}])
+
+    all_dates = School.Services.Dates.get()
+      |> Enum.map(fn x -> x.date end)
+
+    present = data.attendance |> Enum.map(fn x ->
+      x.dates.date
+    end)
+
+    data |> Map.put(:absent, all_dates -- present)
   end
 end
